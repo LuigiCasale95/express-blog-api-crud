@@ -1,6 +1,9 @@
 // importo il framework express
 const express = require("express");
 
+/* importiamo i dati di posts */
+const posts = require("../data/postsArray")
+
 // settiamo il router
 const router = express.Router();
 
@@ -8,7 +11,8 @@ const router = express.Router();
 
 // index
 router.get('/', function (req, res) {
-    res.send('Lista dei post');
+    /* fa ritornare l'array dei posts esportato da postsArray */
+    res.send(posts);
 });
 // show
 router.get('/:id', function (req, res) {
