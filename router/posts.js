@@ -53,7 +53,21 @@ router.patch('/:id', function (req, res) {
 
 // destroy
 router.delete('/:id', function (req, res) {
-    res.send('Eliminazione del post ' + req.params.id);
+    // recuperiamo l'id dall' URL e trasformiamolo in numero
+    const id = parseInt(req.params.id)
+    // cerchiamo il post tramite id
+    const post = posts.find(post => post.id === id);
+    // Piccolo controllo
+    if (!post) {
+    res.status(404);
+    return res.json({
+    status: 404,
+    error: "Not Found",
+    message: "post non trovato"
+    })
+    }
+    // Rimuoviamo il post da array posts
+    posts.splice(posts.indexOf(post), 1);
 });
 
 module.exports = router;
