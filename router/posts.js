@@ -25,10 +25,17 @@ router.get('/', function (req, res) {
     // potrebbe essere stata filtrata o contenere i posts originale
     res.json(filteredPosts);
 });
+
 // show
 router.get('/:id', function (req, res) {
-    res.send('Dettagli del post' + req.params.id);
+    // recuperiamo l'id dall' URL e trasformiamolo in numero
+    const id = parseInt(req.params.id)
+    // cerchiamo il post tramite id
+    const post = posts.find(post => post.id === id);
+    // Restituiamolo sotto forma di JSON
+    res.json(post);
 });
+
 // store
 router.post('/', function (req, res) {
     res.send('Creazione nuovo post');
