@@ -12,7 +12,18 @@ const router = express.Router();
 // index
 router.get('/', function (req, res) {
     /* fa ritornare l'array dei posts esportato da postsArray */
-    res.send(posts);
+
+    //Inizialmente, i posts filtrato corrisponde a quello originale
+    let filteredPosts = posts;
+    // Se la richiesta contiene un filtro, allora filtriamo posts
+    if (req.query.tags) {
+    filteredPosts = posts.filter(
+    post => post.tags.includes(req.query.tags)
+    );
+}
+    // restituiamo la variabile filteredPosts
+    // potrebbe essere stata filtrata o contenere i posts originale
+    res.json(filteredPosts);
 });
 // show
 router.get('/:id', function (req, res) {
