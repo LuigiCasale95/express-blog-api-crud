@@ -53,7 +53,32 @@ function store(req, res) {
 
 /* Update */
 function update(req, res) {
-    res.send('Modifica integrale del post' + req.params.id);
+    /* recupero del id dall' URL e trasformazione in numero*/
+    const id = parseInt(req.params.id)
+    /* ricerca del post tramite l'id */
+    const post = posts.find(post => post.id === id);
+
+    /* piccolo controllo */
+    if(!post) {
+        req.status(404);
+
+        return res.json({
+            error: "not found",
+            message: "post non trovato"
+        })
+    }
+
+    /* aggiornamento del post */
+    post.title = req.body.name;
+    post.content = req.body.content;
+    post.image = req.body.image;
+    post.tags = req.body.tags;
+
+    /* CONTROLLO TRAMITE CONSOLE.LOG DEI POSTS */
+    console.log(posts)
+
+    /* RESTITUZIONE DEI POSTS CON AGGIORNAMENTO */
+    res.json(post)
 }
 
 /* Modify */
