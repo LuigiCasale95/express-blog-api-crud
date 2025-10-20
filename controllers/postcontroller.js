@@ -45,6 +45,10 @@ function store(req, res) {
 
     /* Controllo */
     console.log(posts);
+
+    /* restituzione dello status corretto e del post appena creato */
+    req.status(201);
+    res.json(newPost);
 }
 
 /* Update */
