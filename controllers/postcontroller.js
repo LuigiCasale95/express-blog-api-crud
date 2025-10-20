@@ -1,6 +1,6 @@
 const posts = require('../data/postsArray');
 
-
+/* Index */
 function index(req, res) {
     /* fa ritornare l'array dei posts esportato da postsArray */
 
@@ -17,6 +17,7 @@ function index(req, res) {
     res.json(filteredPosts);
 }
 
+/* Show */
 function show(req, res) {
 // recuperiamo l'id dall' URL e trasformiamolo in numero
     const id = parseInt(req.params.id)
@@ -26,18 +27,37 @@ function show(req, res) {
     res.json(post);
 }
 
+/* Store */
 function store(req, res) {
-    res.send('Creazione nuovo post');
+    const newId = posts[posts.length - 1].id +1;
+
+    /* creazione del nuovo post */
+    const newPost = {
+        id: newId,
+        title: req.body.title,
+        content: req.body.content,
+        image: req.body.image,
+        tags: req.body.tags
+    }
+
+    /* Aggiungiamo il nuovo posta ai posts precedenti */
+    posts.push(newPost);
+
+    /* Controllo */
+    console.log(posts);
 }
 
+/* Update */
 function update(req, res) {
     res.send('Modifica integrale del post' + req.params.id);
 }
 
+/* Modify */
 function modify(req, res) {
         res.send('Modifica parziale del post' + req.params.id);
 }
 
+/*Destroy */
 function destroy(req, res) {
     // recuperiamo l'id dall' URL e trasformiamolo in numero
     const id = parseInt(req.params.id)
