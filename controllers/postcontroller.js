@@ -29,6 +29,7 @@ function show(req, res) {
 
 /* Store */
 function store(req, res) {
+    /* creazione nuova variabile che prende come id la lunghezza del posts -1 + 1 perche si parte da 0 con lenght*/
     const newId = posts[posts.length - 1].id +1;
 
     /* creazione del nuovo post */
@@ -47,7 +48,7 @@ function store(req, res) {
     console.log(posts);
 
     /* restituzione dello status corretto e del post appena creato */
-    req.status(201);
+    res.status(201);
     res.json(newPost);
 }
 
