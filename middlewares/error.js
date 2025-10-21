@@ -1,5 +1,8 @@
-function error(req, res, next) {
-    console.log("prova error");
+function error(err,  req, res, next) {
+    req.status(500);
+    res.json({
+        error: err.message,
+    });
     
 }
 

@@ -11,8 +11,6 @@ const postsRouter = require("./router/posts");
 /* Import middleware di error */
 const error = require("./middlewares/error");
 
-/* registrato per tutte le rotte che iniziano con  /posts */
-app.use(error)
 
 /*usiamo il middleware static di express (per remdere disponibile il file statico ovvero le img in questo caso)*/
 app.use(express.static("public"));
@@ -29,6 +27,8 @@ app.get("/", (req, res) => {
 // rotte per i post
 app.use("/posts", postsRouter);
 
+/* registrato per tutte le rotte che iniziano con  /posts */
+app.use(error)
 
 /* mettiamo in ascolto il server sulla porta definitiva */
 app.listen(port, () => {
