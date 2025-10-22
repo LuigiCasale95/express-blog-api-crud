@@ -10,6 +10,7 @@ const postsRouter = require("./router/posts");
 
 /* Import middleware di error */
 const error = require("./middlewares/error");
+const innesistente = require("./middlewares/innestistente");
 
 
 /*usiamo il middleware static di express (per remdere disponibile il file statico ovvero le img in questo caso)*/
@@ -27,8 +28,11 @@ app.get("/", (req, res) => {
 // rotte per i post
 app.use("/posts", postsRouter);
 
-/* registrato per tutte le rotte che iniziano con  /posts */
+/* registrato per tutte le rotte che iniziano con  /posts in caso di errore del server */
 app.use(error)
+
+/* registrato per tutte le rotte in caso di ricerca innesistente */
+app.use(innesistente)
 
 /* mettiamo in ascolto il server sulla porta definitiva */
 app.listen(port, () => {
